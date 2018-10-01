@@ -1,6 +1,7 @@
 package com.codecool.springbootdrinks.Model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -23,7 +24,14 @@ public class Liquor {
     @JoinTable(name = "liquors_receipes",
             joinColumns = { @JoinColumn(name = "liquor_id") },
             inverseJoinColumns = { @JoinColumn(name = "recipe_id") })
-    private List<Recipe> recipeList;
+    private List<Recipe> recipeList = new ArrayList<>();
+
+    protected Liquor() {}
+
+    public Liquor(String category, String name) {
+        this.category = category;
+        this.name = name;
+    }
 
     public void setLiquorId(long liquorId) {
         this.liquorId = liquorId;
@@ -47,6 +55,14 @@ public class Liquor {
 
     public String getCategory() {
         return category;
+    }
+
+    public List<Recipe> getRecipeList() {
+        return recipeList;
+    }
+
+    public void setRecipeList(List<Recipe> recipeList) {
+        this.recipeList = recipeList;
     }
 
     @Override
