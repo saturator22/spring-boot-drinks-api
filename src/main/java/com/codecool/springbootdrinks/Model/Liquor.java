@@ -1,6 +1,7 @@
 package com.codecool.springbootdrinks.Model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="liquors")
@@ -8,12 +9,21 @@ public class Liquor {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "liquor_id")
-    @ManyToMany(mappedBy = "liquor_ids")
     private long liquorId;
     @Column(name = "name")
     private String name;
     @Column(name = "category")
     private String category;
+
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })
+    @JoinTable(name = "liquors_receipes",
+            joinColumns = { @JoinColumn(name = "liquor_id") },
+            inverseJoinColumns = { @JoinColumn(name = "recipe_id") })
+    private List<Recipe> recipeList;
 
     public void setLiquorId(long liquorId) {
         this.liquorId = liquorId;
