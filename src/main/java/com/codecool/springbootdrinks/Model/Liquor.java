@@ -1,4 +1,4 @@
-package com.codecool.springbootdrinksapi.Model;
+package com.codecool.springbootdrinks.Model;
 
 import javax.persistence.*;
 
