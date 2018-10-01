@@ -8,6 +8,7 @@ public class Liquor {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "liquor_id")
+    @ManyToMany(mappedBy = "liquor_ids")
     private long liquorId;
     @Column(name = "name")
     private String name;
