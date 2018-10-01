@@ -1,16 +1,23 @@
 package com.codecool.springbootdrinks.Model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="types")
 public class Type {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "type_id")
+    @Column(name = "id")
     private long typeId;
     @Column (name = "type_name")
     private String typeName;
+
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "type")
+    private List<Recipe> comments = new ArrayList<>();
 
     public long getTypeId() {
         return typeId;
