@@ -27,7 +27,6 @@ public class Liquor {
     @JoinTable(name = "liquors_receipes",
             joinColumns = { @JoinColumn(name = "liquor_id") },
             inverseJoinColumns = { @JoinColumn(name = "recipe_id") })
-//    @JsonManagedReference
     private List<Recipe> recipeList = new ArrayList<>();
 
     protected Liquor() {}
