@@ -1,6 +1,7 @@
 package com.codecool.springbootdrinks.Service;
 
 import com.codecool.springbootdrinks.Model.Recipe;
+import com.codecool.springbootdrinks.Model.Type;
 import com.codecool.springbootdrinks.Repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,5 +27,13 @@ public class RecipeService {
 
     public Recipe addRecipe(Recipe recipe) {
         return recipeRepository.save(recipe);
+    }
+
+    public Recipe editRecipe(Long recipeId, Recipe requestedRecipe) {
+        Recipe loadedRecipe = recipeRepository.findRecipeById(recipeId);
+        loadedRecipe.setDescription(requestedRecipe.getDescription());
+        loadedRecipe.setName(requestedRecipe.getName());
+
+        return recipeRepository.save(loadedRecipe);
     }
 }
