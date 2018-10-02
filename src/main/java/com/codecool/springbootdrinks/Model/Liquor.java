@@ -1,5 +1,8 @@
 package com.codecool.springbootdrinks.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +19,7 @@ public class Liquor {
     @Column(name = "category")
     private String category;
 
-    @ManyToMany(fetch = FetchType.LAZY,
+    @ManyToMany(fetch = FetchType.EAGER,
             cascade = {
                     CascadeType.PERSIST,
                     CascadeType.MERGE
@@ -24,6 +27,7 @@ public class Liquor {
     @JoinTable(name = "liquors_receipes",
             joinColumns = { @JoinColumn(name = "liquor_id") },
             inverseJoinColumns = { @JoinColumn(name = "recipe_id") })
+//    @JsonManagedReference
     private List<Recipe> recipeList = new ArrayList<>();
 
     protected Liquor() {}

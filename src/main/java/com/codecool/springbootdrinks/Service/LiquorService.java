@@ -1,22 +1,56 @@
 package com.codecool.springbootdrinks.Service;
 
 import com.codecool.springbootdrinks.Model.Liquor;
-import com.codecool.springbootdrinks.Model.Recipe;
-import com.codecool.springbootdrinks.Model.Type;
 import com.codecool.springbootdrinks.Repository.LiquorRepository;
-import com.codecool.springbootdrinks.Repository.TypeRepository;
+import com.codecool.springbootdrinks.Repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class LiquorService {
     @Autowired
     LiquorRepository liquorRepository;
-    @Autowired
-    TypeRepository typeRepository;
 
-    public LiquorService(LiquorRepository liquorRepository, TypeRepository typeRepository) {
+    @Autowired
+    RecipeRepository recipeRepository;
+
+    public LiquorService(LiquorRepository liquorRepository, RecipeRepository recipeRepository) {
         this.liquorRepository = liquorRepository;
+        this.recipeRepository = recipeRepository;
+    }
+
+    public List<Liquor> getAllLiquors() {
+        return liquorRepository.findAll();
+    }
+
+    public Liquor getLiquorById(Long id) {
+        return liquorRepository.findLiquorByLiquorId(id);
+    }
+
+    public Liquor createLiquor(Liquor liquor) {
+//        recipeRepository.findRecipeById(1L);
+//        liquor.getRecipeList().add(recipeRepository.findRecipeById(4L));
+        return liquorRepository.save(liquor);
+    }
+
+    public ResponseEntity<?> deleteLiquor(Long liquorId) {
+        return liquorRepository.findById(liquorId)
+                .map(liquor -> {
+                    liquorRepository.delete(liquor);
+                return ResponseEntity.ok().build();})
+                .orElseThrow(() -> new IllegalArgumentException("There is no resource like that"));
+    }
+
+    public Liquor updateLiquor(Long liquorId, Liquor liquorRequest) {
+        return liquorRepository.findById(liquorId)
+                .map(liquor -> {
+                    liquor.setCategory(liquorRequest.getCategory());
+                    liquor.setName(liquorRequest.getName());
+                    return liquorRepository.save(liquor);
+                }).orElseThrow(() -> new IllegalArgumentException("There is no resource like that"));
     }
 
 //    public void addData() {
