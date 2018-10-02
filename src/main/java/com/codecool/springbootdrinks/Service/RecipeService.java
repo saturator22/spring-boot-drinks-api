@@ -31,6 +31,7 @@ public class RecipeService {
 
     public Recipe editRecipe(Long recipeId, Recipe requestedRecipe) {
         Recipe loadedRecipe = recipeRepository.findRecipeById(recipeId);
+        loadedRecipe.setLiquorList(requestedRecipe.getLiquorList());
         loadedRecipe.setDescription(requestedRecipe.getDescription());
         loadedRecipe.setName(requestedRecipe.getName());
 

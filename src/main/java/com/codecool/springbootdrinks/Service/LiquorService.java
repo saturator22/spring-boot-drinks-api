@@ -70,7 +70,6 @@ public class LiquorService {
 
         typeRepository.save(type);
         typeRepository.save(type1);
-//		Type type2 = new Type("Long");
 
         liquor.getRecipeList().add(recipe);
         liquor2.getRecipeList().add(recipe);
