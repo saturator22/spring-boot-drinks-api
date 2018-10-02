@@ -33,7 +33,7 @@ public class Recipe {
                     CascadeType.REMOVE
             },
             mappedBy = "recipeList")
-    @OnDelete(action = OnDeleteAction.CASCADE)
+
     @OnDelete(action = OnDeleteAction.CASCADE)
     List<Liquor> liquorList = new ArrayList<>();
 
