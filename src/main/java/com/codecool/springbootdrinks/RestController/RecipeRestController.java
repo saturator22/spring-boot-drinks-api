@@ -23,4 +23,8 @@ public class RecipeRestController {
         return recipeService.findByRecipeId(id);
     }
 
+    @PostMapping(value = "/recipes", consumes = "application/json; charset=UTF-8", produces = "application/json; charset=UTF-8")
+    public Recipe createRecipe(@Valid @RequestBody Recipe recipe) {
+        return recipeService.addRecipe(recipe);
+    }
 }
