@@ -7,7 +7,6 @@ import java.util.List;
 @Entity
 @Table(name="types")
 public class Type {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
@@ -19,12 +18,6 @@ public class Type {
             fetch = FetchType.LAZY,
             mappedBy = "type")
     private List<Recipe> comments = new ArrayList<>();
-
-    protected Type(){}
-
-    public Type(String typeName) {
-        this.typeName = typeName;
-    }
 
     public long getTypeId() {
         return typeId;
@@ -40,14 +33,6 @@ public class Type {
 
     public void setTypeName(String typeName) {
         this.typeName = typeName;
-    }
-
-    public List<Recipe> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Recipe> comments) {
-        this.comments = comments;
     }
 
     @Override
