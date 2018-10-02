@@ -3,6 +3,7 @@ package com.codecool.springbootdrinks.Service;
 import com.codecool.springbootdrinks.Model.Type;
 import com.codecool.springbootdrinks.Repository.TypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,7 +32,11 @@ public class TypeService {
     public Type editType(Long typeId, Type requestedType) {
         Type loadedType = typeRepository.findTypeByTypeId(typeId);
         loadedType.setTypeName(requestedType.getTypeName());
-        loadedType.setRecipes(requestedType.getRecipes());
         return typeRepository.save(loadedType);
+    }
+
+    public ResponseEntity<?> deleteType(Long typeId) {
+        typeRepository.delete(typeRepository.findTypeByTypeId(typeId));
+        return ResponseEntity.ok().build();
     }
 }

@@ -33,8 +33,13 @@ public class Recipe {
                     CascadeType.REMOVE
             },
             mappedBy = "recipeList")
+<<<<<<< HEAD
+
     @OnDelete(action = OnDeleteAction.CASCADE)
+=======
     @OnDelete(action = OnDeleteAction.CASCADE)
+//    @JsonBackReference(value = "liquor-recipe")
+>>>>>>> a018668151229b0b39b7b112d5c3230248c4aad1
     List<Liquor> liquorList = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.EAGER, optional = true)
