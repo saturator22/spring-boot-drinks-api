@@ -32,7 +32,7 @@ public class Recipe {
                     CascadeType.MERGE
             },
             mappedBy = "recipeList")
-
+    @OnDelete(action = OnDeleteAction.CASCADE)
 //    @JsonBackReference(value = "liquor-recipe")
     List<Liquor> liquorList = new ArrayList<>();
 
