@@ -1,6 +1,7 @@
 package com.codecool.springbootdrinks.Model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
@@ -9,10 +10,10 @@ import java.util.List;
 
 @Entity
 @Table(name="liquors")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "liquorId")
 public class Liquor {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "liquor_id")
@@ -22,7 +23,7 @@ public class Liquor {
     @Column(name = "category")
     private String category;
 
-    @ManyToMany(fetch = FetchType.EAGER,
+    @ManyToMany(fetch = FetchType.LAZY,
             cascade = {
                     CascadeType.PERSIST,
                     CascadeType.MERGE
@@ -30,6 +31,8 @@ public class Liquor {
     @JoinTable(name = "liquors_receipes",
             joinColumns = { @JoinColumn(name = "liquor_id") },
             inverseJoinColumns = { @JoinColumn(name = "recipe_id") })
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
     private List<Recipe> recipeList = new ArrayList<>();
 
     protected Liquor() {}
