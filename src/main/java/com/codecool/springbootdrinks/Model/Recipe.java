@@ -29,18 +29,18 @@ public class Recipe {
     @ManyToMany(fetch = FetchType.EAGER,
             cascade = {
                     CascadeType.PERSIST,
-                    CascadeType.MERGE
+                    CascadeType.MERGE,
+                    CascadeType.REMOVE
             },
             mappedBy = "recipeList")
 
-//    @JsonBackReference(value = "liquor-recipe")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     List<Liquor> liquorList = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.EAGER, optional = true)
     @JoinColumn(name = "type_id", referencedColumnName = "type_id", nullable = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonBackReference
-    @Fetch(FetchMode.JOIN)
     private Type type;
 
     protected Recipe(){}
