@@ -12,7 +12,7 @@ public class Type {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+    @Column(name = "type_id")
     private long typeId;
     @Column (name = "type_name")
     private String typeName;
@@ -20,8 +20,8 @@ public class Type {
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             mappedBy = "type")
-    @JsonManagedReference
-    private List<Recipe> comments = new ArrayList<>();
+//    @JsonManagedReference
+    private List<Recipe> recipes = new ArrayList<>();
 
     protected Type(){}
 
@@ -45,12 +45,12 @@ public class Type {
         this.typeName = typeName;
     }
 
-    public List<Recipe> getComments() {
-        return comments;
+    public List<Recipe> getRecipes() {
+        return recipes;
     }
 
-    public void setComments(List<Recipe> comments) {
-        this.comments = comments;
+    public void setRecipes(List<Recipe> comments) {
+        this.recipes = comments;
     }
 
     @Override
