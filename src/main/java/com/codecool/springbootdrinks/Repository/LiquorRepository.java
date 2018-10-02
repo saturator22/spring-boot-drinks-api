@@ -11,5 +11,4 @@ import java.util.List;
 @Repository
 public interface LiquorRepository extends JpaRepository<Liquor, Long> {
 
-    List<Liquor> findAll();
 }
