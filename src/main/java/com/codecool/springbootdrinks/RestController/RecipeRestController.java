@@ -23,8 +23,13 @@ public class RecipeRestController {
         return recipeService.findByRecipeId(id);
     }
 
-    @PostMapping(value = "/recipes", consumes = "application/json; charset=UTF-8", produces = "application/json; charset=UTF-8")
+    @PostMapping(value = "/recipes")
     public Recipe createRecipe(@Valid @RequestBody Recipe recipe) {
         return recipeService.addRecipe(recipe);
+    }
+
+    @PutMapping(value = "/recipes/{id}")
+    public Recipe updateRecipe(@PathVariable Long id, @Valid @RequestBody Recipe recipe) {
+        return recipeService.editRecipe(id, recipe);
     }
 }
