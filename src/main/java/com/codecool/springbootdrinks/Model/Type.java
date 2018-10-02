@@ -1,6 +1,8 @@
 package com.codecool.springbootdrinks.Model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -20,7 +22,7 @@ public class Type {
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             mappedBy = "type")
-//    @JsonManagedReference
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Recipe> recipes = new ArrayList<>();
 
     protected Type(){}
