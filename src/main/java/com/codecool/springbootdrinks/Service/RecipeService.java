@@ -4,7 +4,9 @@ import com.codecool.springbootdrinks.Model.Recipe;
 import com.codecool.springbootdrinks.Model.Type;
 import com.codecool.springbootdrinks.Repository.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -35,5 +37,13 @@ public class RecipeService {
         loadedRecipe.setName(requestedRecipe.getName());
 
         return recipeRepository.save(loadedRecipe);
+    }
+
+    public ResponseEntity<?> deleteRecipe(@PathVariable Long id) {
+        return recipeRepository.findById(id)
+                .map(recipe -> {
+                    recipeRepository.delete(recipe);
+                    return ResponseEntity.ok().build();
+                }).orElseThrow(() -> new IllegalArgumentException("Question not found with id " + id));
     }
 }
