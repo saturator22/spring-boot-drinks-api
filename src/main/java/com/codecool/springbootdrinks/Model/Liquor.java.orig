@@ -1,7 +1,12 @@
 package com.codecool.springbootdrinks.Model;
 
+<<<<<<< HEAD
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+=======
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+>>>>>>> 8562f8b3ad0d15be07544161809e8d0d46fc0e2a
 
 import javax.persistence.*;
 import java.util.ArrayList;
