@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface TypeRepository extends CrudRepository<Type, Long> {
     List<Type> findAll();
+    Type findTypeByTypeId(Long id);
 }
