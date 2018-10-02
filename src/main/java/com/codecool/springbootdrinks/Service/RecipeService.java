@@ -23,4 +23,8 @@ public class RecipeService {
     public Recipe findByRecipeId(Long recipeId) {
         return recipeRepository.findRecipeById(recipeId);
     }
+
+    public Recipe addRecipe(Recipe recipe) {
+        return recipeRepository.save(recipe);
+    }
 }
