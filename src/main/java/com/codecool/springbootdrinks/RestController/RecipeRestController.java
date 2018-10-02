@@ -3,6 +3,7 @@ package com.codecool.springbootdrinks.RestController;
 import com.codecool.springbootdrinks.Model.Recipe;
 import com.codecool.springbootdrinks.Service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -31,5 +32,10 @@ public class RecipeRestController {
     @PutMapping(value = "/recipes/{id}")
     public Recipe updateRecipe(@PathVariable Long id, @Valid @RequestBody Recipe recipe) {
         return recipeService.editRecipe(id, recipe);
+    }
+
+    @DeleteMapping(value = "/recipes/{id}")
+    public ResponseEntity<?> deleteRecipe(@PathVariable Long id) {
+        return recipeService.deleteRecipe(id);
     }
 }
