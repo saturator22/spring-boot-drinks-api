@@ -1,5 +1,7 @@
 package com.codecool.springbootdrinks.Model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +20,7 @@ public class Type {
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             mappedBy = "type")
+    @JsonManagedReference
     private List<Recipe> comments = new ArrayList<>();
 
     protected Type(){}

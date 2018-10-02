@@ -1,5 +1,7 @@
 package com.codecool.springbootdrinks.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -9,6 +11,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "recipes")
+
 public class Recipe {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,11 +29,13 @@ public class Recipe {
                     CascadeType.MERGE
             },
             mappedBy = "recipeList")
+    @JsonBackReference
     List<Liquor> liquorList = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
 //    @JoinColumn(name = "type_id", referencedColumnName = "type_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonBackReference
     private Type type;
 
     protected Recipe(){}
