@@ -55,6 +55,7 @@ public class LiquorService {
                 .map(liquor -> {
                     liquor.setCategory(liquorRequest.getCategory());
                     liquor.setName(liquorRequest.getName());
+                    liquor.setRecipeList(liquorRequest.getRecipeList());
                     return liquorRepository.save(liquor);
                 }).orElseThrow(() -> new IllegalArgumentException("There is no resource like that"));
     }
