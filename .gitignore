@@ -25,3 +25,5 @@
 /.nb-gradle/
 src/main/java/com/codecool/springbootdrinks/SpringBootDrinksApplication.java
 src/main/resources/application.properties
+pom.xml
+src/main/resources/application.properties
