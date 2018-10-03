@@ -45,13 +45,22 @@ public class RecipeService {
         loadedRecipe.setName(requestedRecipeDTO.getName());
 
         List<Liquor> liquors = loadedRecipe.getLiquorList();
-        liquors.clear();
-        for(Long id: requestedRecipeDTO.getLiquorList()) {
-            Liquor liquor = liquorRepository.findLiquorByLiquorId(id);
-            liquor.getRecipeList()
-                    .remove(recipeRepository.findRecipeById(requestedRecipeDTO.getId()));
-            liquorRepository.save(liquor);
-            liquors.add(liquor);
+
+        for (Liquor liquor : liquors) {
+            if (!requestedRecipeDTO.getLiquorList().contains(liquor.getLiquorId())) {
+                recipeRepository.deleteLiquorFromRecipe(liquor.getLiquorId(), recipeId);
+            }
+        }
+//        liquors.clear();
+        for (Long liquorId : requestedRecipeDTO.getLiquorList()) {
+            Liquor liquor = liquorRepository.findLiquorByLiquorId(liquorId);
+            if(!liquors.contains(liquor)) {
+                liquors.add(liquor);
+
+                recipeRepository.addLiquorToRecipe(liquorId, recipeId);
+
+                liquorRepository.save(liquor);
+            }
         }
 
         return recipeRepository.save(loadedRecipe);
