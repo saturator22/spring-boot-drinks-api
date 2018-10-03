@@ -24,12 +24,8 @@ public class Recipe {
     @Column(columnDefinition = "text default ''")
     String description;
 
-    @ManyToMany(fetch = FetchType.LAZY,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE,
-                    CascadeType.REMOVE
-            },
+    @ManyToMany(fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL,
             mappedBy = "recipeList")
 
     @OnDelete(action = OnDeleteAction.CASCADE)
