@@ -1,6 +1,7 @@
 package com.codecool.springbootdrinks.RestController;
 
 import com.codecool.springbootdrinks.Model.Recipe;
+import com.codecool.springbootdrinks.ModelDTO.RecipeDTO;
 import com.codecool.springbootdrinks.Service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,8 +31,8 @@ public class RecipeRestController {
     }
 
     @PutMapping(value = "/recipes/{id}")
-    public Recipe updateRecipe(@PathVariable Long id, @Valid @RequestBody Recipe recipe) {
-        return recipeService.editRecipe(id, recipe);
+    public Recipe updateRecipe(@PathVariable Long id, @Valid @RequestBody RecipeDTO recipeDTO) {
+        return recipeService.editRecipe(id, recipeDTO);
     }
 
     @DeleteMapping(value = "/recipes/{id}")
