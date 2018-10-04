@@ -22,6 +22,8 @@ public class Liquor {
     private String name;
     @Column(name = "category")
     private String category;
+    @Column(name = "is_archived")
+    private boolean archived = false;
 
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {
@@ -72,6 +74,14 @@ public class Liquor {
 
     public void setRecipeList(List<Recipe> recipeList) {
         this.recipeList = recipeList;
+    }
+
+    public boolean getIsArchived() {
+        return archived;
+    }
+
+    public void setIsArchived(boolean archived) {
+        this.archived = archived;
     }
 
     @Override
