@@ -24,6 +24,7 @@
     <Logger name="com.codecool.springbootdrinks.Service" level="debug" additivity="false">
         <AppenderRef ref="ConsoleAppender" />
         <AppenderRef level="info" ref="FileAppender" />
+        <AppenderRef level="error" ref="FileAppender" />
     </Logger>
 
     <Root level="info">
