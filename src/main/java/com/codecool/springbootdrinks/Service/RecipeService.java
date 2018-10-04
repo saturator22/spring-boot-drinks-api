@@ -1,5 +1,6 @@
 package com.codecool.springbootdrinks.Service;
 
+import com.codecool.springbootdrinks.DTOMapper.Mapper;
 import com.codecool.springbootdrinks.Model.Liquor;
 import com.codecool.springbootdrinks.Model.Recipe;
 import com.codecool.springbootdrinks.Model.Type;
@@ -20,7 +21,7 @@ public class RecipeService {
     @Autowired
     private RecipeRepository recipeRepository;
     @Autowired
-    private LiquorRepository liquorRepository;
+    private Mapper mapper;
 
     public RecipeService(RecipeRepository recipeRepository) {
         this.recipeRepository = recipeRepository;
@@ -40,30 +41,8 @@ public class RecipeService {
 
     @Transactional
     public Recipe editRecipe(Long recipeId, RecipeDTO requestedRecipeDTO) {
-        Recipe loadedRecipe = recipeRepository.findRecipeById(recipeId);
-        loadedRecipe.setDescription(requestedRecipeDTO.getDescription());
-        loadedRecipe.setName(requestedRecipeDTO.getName());
 
-        List<Liquor> liquors = loadedRecipe.getLiquorList();
-
-        for (Liquor liquor : liquors) {
-            if (!requestedRecipeDTO.getLiquorList().contains(liquor.getLiquorId())) {
-                recipeRepository.deleteLiquorFromRecipe(liquor.getLiquorId(), recipeId);
-            }
-        }
-//        liquors.clear();
-        for (Long liquorId : requestedRecipeDTO.getLiquorList()) {
-            Liquor liquor = liquorRepository.findLiquorByLiquorId(liquorId);
-            if(!liquors.contains(liquor)) {
-                liquors.add(liquor);
-
-                recipeRepository.addLiquorToRecipe(liquorId, recipeId);
-
-                liquorRepository.save(liquor);
-            }
-        }
-
-        return recipeRepository.save(loadedRecipe);
+        return mapper.mapRecipeDTOtoRecipe(recipeId, requestedRecipeDTO);
     }
 
     public ResponseEntity<?> deleteRecipe(@PathVariable Long id) {
