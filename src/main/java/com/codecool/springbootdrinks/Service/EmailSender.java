@@ -4,6 +4,8 @@ import com.google.common.collect.Lists;
 import it.ozimov.springboot.mail.model.Email;
 import it.ozimov.springboot.mail.model.defaultimpl.DefaultEmail;
 import it.ozimov.springboot.mail.service.EmailService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +15,10 @@ import java.io.UnsupportedEncodingException;
 
 @Service
 public class EmailSender {
+    private static final Logger log4j = LogManager.getLogger(LiquorService.class);
+
     @Autowired
-    public EmailService emailService;
+    private EmailService emailService;
 
     public EmailSender() {}
 
@@ -32,10 +36,12 @@ public class EmailSender {
                     .body(body)
                     .encoding("UTF-8").build();
             emailService.send(email);
+
         } catch (AddressException ae) {
-            ae.printStackTrace();
+            log4j.error("Email sender exception(Address exception): " + ae.toString());
+
         } catch (UnsupportedEncodingException ue) {
-            ue.printStackTrace();
+            log4j.error("Email sender exception(Unsupported encoding): " + ue.toString());
         }
     }
 }
