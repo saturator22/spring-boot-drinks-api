@@ -29,7 +29,7 @@ public class LiquorRestController {
         return liquorService.createLiquor(liquor);
     }
     @DeleteMapping("/liquors/{liquorId}")
-    public ResponseEntity<?> deleteLiquor(@PathVariable Long liquorId) {
+    public Liquor deleteLiquor(@PathVariable Long liquorId) {
         return liquorService.deleteLiquor(liquorId);
     }
 
