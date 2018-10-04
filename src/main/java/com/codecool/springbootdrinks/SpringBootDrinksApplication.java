@@ -13,11 +13,11 @@ public class SpringBootDrinksApplication {
 		SpringApplication.run(SpringBootDrinksApplication.class, args);
 	}
 
-//	@Bean
-//	public CommandLineRunner demo(LiquorService liquorService) {
-//		return (args) -> {
-//			liquorService.addData();
-//		};
-//	}
+	@Bean
+	public CommandLineRunner demo(LiquorService liquorService) {
+		return (args) -> {
+			liquorService.addData();
+		};
+	}
 }
 
