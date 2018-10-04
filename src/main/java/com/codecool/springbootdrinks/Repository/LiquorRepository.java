@@ -10,5 +10,6 @@ import java.util.List;
 @Repository
 public interface LiquorRepository extends JpaRepository<Liquor, Long> {
     List<Liquor> findLiquorsByRecipeListContains(Recipe recipe);
-    Liquor findLiquorByLiquorId(Long liquorId);
+    List<Liquor> findAllByArchivedFalse();
+    Liquor findLiquorByLiquorIdAndArchivedFalse(Long liquorId);
 }
