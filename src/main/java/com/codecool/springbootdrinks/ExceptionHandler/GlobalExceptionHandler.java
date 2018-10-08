@@ -1,6 +1,7 @@
 package com.codecool.springbootdrinks.ExceptionHandler;
 
 import java.io.IOException;
+import java.net.ConnectException;
 import java.sql.SQLException;
 import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
