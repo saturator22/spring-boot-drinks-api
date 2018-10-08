@@ -50,6 +50,7 @@ public class LiquorService {
         return liquorRepository.findById(liquorId)
                 .map(liquor -> {
                     liquor.setIsArchived(true);
+                    log4j.info("Object: " + liquor + " archved succesfully");
                     return liquorRepository.save(liquor);
                 }).orElseThrow(() -> {log4j.error("Failed to delete object with id: " + liquorId);
                 return new IllegalArgumentException("There is no object with id: " + liquorId);});

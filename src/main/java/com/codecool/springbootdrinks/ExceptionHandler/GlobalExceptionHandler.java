@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import com.codecool.springbootdrinks.Service.EmailSender;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.hibernate.exception.JDBCConnectionException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessResourceFailureException;
 import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -42,8 +44,17 @@ public class GlobalExceptionHandler {
     }
 
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR, reason = "Cannot connect to database")
-    @ExceptionHandler(CannotGetJdbcConnectionException.class)
+    @ExceptionHandler(DataAccessResourceFailureException.class)
     public void handleJdbcConnectionException() {
+        log4j.error("500 : db connection lost");
+        String subject = "Database connection is down";
+        String body = "Check database connection";
+        emailSender.sendEmailWithoutTemplating(subject, body);
+    }
+
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR, reason = "Cannot connect to database")
+    @ExceptionHandler(JDBCConnectionException.class)
+    public void handleJdbcConnectionException2() {
         log4j.error("500 : db connection lost");
         String subject = "Database connection is down";
         String body = "Check database connection";
